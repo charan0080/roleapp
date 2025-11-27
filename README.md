@@ -53,6 +53,9 @@ Use the Vite URL (typically `http://localhost:5173/`) to view the UI. The fronte
 - Role-enforcing permissions, JWT authentication, and CORS-safe API.
 - Admin seeding command and dedicated user management views.
 - React frontend with AuthContext, protected routes, login/register forms, admin dashboard, and student welcome page.
+- Change Password functionality for authenticated users.
+- Modern, clean UI with professional styling and responsive design.
+- Modal-based user creation for admins.
 
 ## Admin credentials
 After running `seed_admin`, default credentials are:
@@ -63,6 +66,22 @@ After running `seed_admin`, default credentials are:
 ## Running both servers
 Start the backend first (see above). In a new terminal, start the frontend. Keep both running to enable the full experience.
 
-## Next steps / TODO
-- Add automated frontend tests for critical flows.
-- Improve README by adding screenshots once UI is stable.
+## Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Register Page
+![Register Page](screenshots/register.png)
+
+### Student Dashboard
+![Student Dashboard](screenshots/student-dashboard.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+### Create User Modal
+![Create User Modal](screenshots/create-user-modal.png)
+
+### Change Password
+![Change Password](screenshots/change-password.png)

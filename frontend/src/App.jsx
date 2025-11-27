@@ -1,12 +1,13 @@
-import { Routes, Route, Navigate, Link } from 'react-router-dom'
+import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AdminDashboard from './pages/AdminDashboard'
 import StudentWelcome from './pages/StudentWelcome'
+import ChangePasswordPage from './pages/ChangePasswordPage'
 import './App.css'
 
-const ProtectedRoute = ({ element: Element, roles }) => {
+const ProtectedRoute = ({ element: roles }) => {
   const { user, loading } = useAuth()
 
   if (loading) {
@@ -22,13 +23,18 @@ const ProtectedRoute = ({ element: Element, roles }) => {
 
 function App() {
   const { user, logout, loading } = useAuth()
+  const navigate = useNavigate()
 
   return (
-    <div className="app-shell">
+    <div className="app-shell ">
       <nav className="main-nav">
         <div>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          {!user && (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
         </div>
         <div>
           {!loading && user ? (
@@ -39,6 +45,13 @@ function App() {
                 className="ghost"
               >
                 Dashboard
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('/change-password')}
+                className="ghost"
+              >
+                Change Password
               </button>
               <button type="button" onClick={logout} className="ghost">
                 Logout {user.username}
@@ -52,6 +65,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<ProtectedRoute element={AdminDashboard} roles={['ADMIN']} />} />
         <Route path="/student" element={<ProtectedRoute element={StudentWelcome} roles={['STUDENT']} />} />
+        <Route path="/change-password" element={<ProtectedRoute element={ChangePasswordPage} />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </div>
